@@ -5,16 +5,11 @@ from PyDictionary import PyDictionary
 # makes it a little cleaner
 dictionary = PyDictionary()
 
-reddit = praw.Reddit(
-    client_id = "",
-    client_secret = "",
-    password = "",
-    user_agent = "",
-    username = ""
-)
+# creates reddit instance using credentials from praw.ini file
+reddit = praw.Reddit("config")
 
 # sets subreddit for bot to run in
-subreddit = reddit.subreddit("")
+subreddit = reddit.subreddit("uncommonwordsbotdemo")
 
 # creates the template for the bot to use in its response when it detects uncommon words
 reply_template = """I am a bot and I noticed that you\'ve used one or more uncommon words in
@@ -66,7 +61,7 @@ for comment in subreddit.stream.comments():
             formatted_word_def = (f"{word} ({pos.lower()}): {'; '.join(definitions)}")
             print(formatted_word_def)
             reply_defs += formatted_word_def + '\n\n'
-    # this will eventually be placed with a more sophisticated logging system, but in the
+    # this will eventually be replaced with a more sophisticated logging system, but in the
     # meantime, it just ensures the bot does not try to respond to its own comments
     if 'bot' not in comment.body:
         # combines comment templates to create the final reply and then submits it
