@@ -30,10 +30,9 @@ max_freq = 0.000001
 def is_word(word):
     try:
         is_word = dictionary.meaning(word, disable_errors=True)
+        return bool(is_word)
     except:
         return False
-    else:
-        return bool(is_word)
 
 
 def uncommon_words(text):
